@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -23,6 +25,27 @@ class RunResult {
   final List<StepResult> steps;
 
   bool get passed => steps.every((step) => step.passed);
+}
+
+const String nlVerifyResultStartMarker = '===NL_VERIFY_RESULT_START===';
+const String nlVerifyResultEndMarker = '===NL_VERIFY_RESULT_END===';
+
+/// Prints a machine-readable result for the host-side verify orchestrator.
+void printNlVerifyResult(RunResult result) {
+  final json = jsonEncode({
+    'steps': [
+      for (final step in result.steps)
+        {
+          'action': step.action.toJson(),
+          'passed': step.passed,
+          'error': step.error,
+          'durationMs': step.duration.inMilliseconds,
+        },
+    ],
+  });
+  // This line is the intentional process boundary consumed by bin/verify.dart.
+  // ignore: avoid_print
+  print('$nlVerifyResultStartMarker$json$nlVerifyResultEndMarker');
 }
 
 Future<RunResult> runActionPlan(
