@@ -11,7 +11,7 @@ Kane CLI(자연어로 브라우저 플로우를 검증하는 도구)의 문제�
 - [x] 테스트 대상 Flutter 앱 스캐폴딩 — 로그인 화면(하드코딩 계정 + 모킹 API + accessToken/refreshToken) + 메인 화면(할 일 리스트, 체크박스로 완료 상태 토글)
 - [x] `integration_test` 패키지 세팅 확인 (실기기/에뮬레이터에서 구동)
 - [x] 고정 action DSL(JSON 스키마) 정의 — `enterText`/`tap`/`expectVisible`/`expectChecked`/`expectUnchecked`/`expectText` 6개 액션 타입, Dart 모델(`lib/verify/action.dart`) + JSON Schema(`docs/action_dsl.schema.json`) 확정
-- [ ] "자연어 문장 → action DSL JSON" 파싱 프롬프트 작성 (Claude API, structured output/tool calling으로 스키마 강제)
+- [x] "자연어 문장 → action DSL JSON" 파싱 구현 — 별도 API 키 없이 로그인된 **Claude Code CLI(`claude -p --json-schema`)를 shell-out**해서 구조화된 출력 강제 (`lib/verify/schema.dart`, `lib/verify/nl_parser.dart`, `bin/parse_action_plan.dart`)
 - [ ] DSL을 실제로 실행하는 Dart 러너 작성 — 액션 타입별로 `tester.tap()` / `tester.enterText()` / `expect()` 매핑
 - [ ] 결과 출력 — 터미널 요약(pass/fail, 소요시간) + 로컬 evidence 폴더(스텝별 스크린샷, 실행 액션 로그)
 - [ ] 로그인 플로우 + 메인 기능 플로우, 각각 다른 문장 표현(같은 의도, 다른 어휘)으로 여러 번 테스트 — 동일 DSL로 수렴하는지 확인
