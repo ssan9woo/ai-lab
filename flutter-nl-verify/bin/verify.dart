@@ -10,9 +10,7 @@ const _generatedTestPath = 'integration_test/generated_run.dart';
 
 Future<void> main(List<String> arguments) async {
   if (arguments.length != 1 || arguments.single.trim().isEmpty) {
-    stderr.writeln(
-      'Usage: dart run bin/verify.dart "<natural language instruction>"',
-    );
+    stderr.writeln('Usage: ./verify "<natural language instruction>"');
     exitCode = 64;
     return;
   }
