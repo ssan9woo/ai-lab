@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flutter-nl-verify.local/schemas/action_dsl.schema.json",
+  "title": "Flutter NL Verify Action Plan",
+  "description": "An ordered list of UI actions and assertions.",
+  "type": "array",
+  "items": {
+    "oneOf": [
+      { "$ref": "#/$defs/enterText" },
+      { "$ref": "#/$defs/tap" },
+      { "$ref": "#/$defs/expectVisible" },
+      { "$ref": "#/$defs/expectChecked" },
+      { "$ref": "#/$defs/expectUnchecked" },
+      { "$ref": "#/$defs/expectText" }
+    ]
+  },
+  "$defs": {
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["by", "value"],
+      "properties": {
+        "by": { "type": "string", "enum": ["key", "text"] },
+        "value": { "type": "string" }
+      }
+    },
+    "enterText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "target", "value"],
+      "properties": {
+        "action": { "const": "enterText" },
+        "target": { "$ref": "#/$defs/target" },
+        "value": { "type": "string" }
+      }
+    },
+    "tap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "target"],
+      "properties": {
+        "action": { "const": "tap" },
+        "target": { "$ref": "#/$defs/target" }
+      }
+    },
+    "expectVisible": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "target"],
+      "properties": {
+        "action": { "const": "expectVisible" },
+        "target": { "$ref": "#/$defs/target" }
+      }
+    },
+    "expectChecked": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "target"],
+      "properties": {
+        "action": { "const": "expectChecked" },
+        "target": { "$ref": "#/$defs/target" }
+      }
+    },
+    "expectUnchecked": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "target"],
+      "properties": {
+        "action": { "const": "expectUnchecked" },
+        "target": { "$ref": "#/$defs/target" }
+      }
+    },
+    "expectText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "target", "value"],
+      "properties": {
+        "action": { "const": "expectText" },
+        "target": { "$ref": "#/$defs/target" },
+        "value": { "type": "string" }
+      }
+    }
+  }
+}
