@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'action.dart';
+import 'package:flutter_nl_verify/verify/action.dart';
 
 class StepResult {
   const StepResult({

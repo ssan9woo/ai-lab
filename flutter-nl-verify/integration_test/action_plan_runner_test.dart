@@ -3,7 +3,8 @@ import 'package:integration_test/integration_test.dart';
 
 import 'package:flutter_nl_verify/main.dart' as app;
 import 'package:flutter_nl_verify/verify/action.dart';
-import 'package:flutter_nl_verify/verify/runner.dart';
+
+import 'support/runner.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
